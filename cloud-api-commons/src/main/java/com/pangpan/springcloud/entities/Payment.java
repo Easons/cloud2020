@@ -14,5 +14,5 @@ public class Payment {
 
     private Long id;
     private  String serial;
-    
+
 }

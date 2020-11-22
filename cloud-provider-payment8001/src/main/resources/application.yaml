@@ -15,11 +15,30 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     # mysql驱动类
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.0.101:3306/jdbc?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://192.168.1.103:3306/jdbc?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
     username: root
     password: 123456
 
+eureka:
+  client:
+    #表示是否将自己注册进EurekaServer默认为true
+    register-with-eureka: true
+    #是否从EurekaServer抓取已有的注册消息，默认为true，单节点无所谓，集群必须设置为true才能配合ribbon使用负载均衡
+    fetch-registry: true
+    service-url:
+#      defaultZone: http://localhost:7001/eureka/
+     defaultZone: http://eureka7002.com:7002/eureka,http://eureka7001.com:7001/eureka/
+
+
+#  两种写法
+#  instance:
+#    prefer-ip-address: true #注册时使用IP地址进行注册
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:7001/eureka/
 
 mybatis:
   mapper-locations: classpath*:mapper/*.xml
   type-aliases-package: com.pangpan.springcloud.entities
+
+
