@@ -1,11 +1,15 @@
 package com.pangpan.springcloud.service;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.RandomUtil;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -71,6 +75,11 @@ public class PaymentService {
             throw new RuntimeException("******id 不能为负数");
         }
         String serialNumber = IdUtil.simpleUUID();
+        /**
+         * 都是生成UUID
+         */
+//        IdUtil.simpleUUID();
+//        UUID.randomUUID();
         return Thread.currentThread().getName() + "\t" + "调用成功，流水号：" + serialNumber;
     }
 

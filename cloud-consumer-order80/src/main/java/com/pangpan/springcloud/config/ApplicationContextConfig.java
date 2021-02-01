@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 public class ApplicationContextConfig {
 
     @Bean
-    @LoadBalanced//负载均衡，不然找不到集群中哪个地址的服务
+//    @LoadBalanced//负载均衡，不然找不到集群中哪个地址的服务
     public RestTemplate getRestTemplate()
     {
         return new RestTemplate();

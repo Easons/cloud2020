@@ -8,7 +8,7 @@ import java.util.List;
 
 public class WatchChild {
 
-    private final static String CONNECT_STRING = "192.168.1.103:2181";
+    private final static String CONNECT_STRING = "192.168.56.10:2181";
 
     private final static String PATH = "/pangpan";
 
@@ -29,10 +29,10 @@ public class WatchChild {
 
     public ZooKeeper startZK() throws IOException {
 
-        return new ZooKeeper(CONNECT_STRING, SESSION_TIMEOUT, WatchedEvent -> {
+        return new ZooKeeper(CONNECT_STRING, SESSION_TIMEOUT, (aa) -> {
 
-            if (WatchedEvent.getType() == Watcher.Event.EventType.NodeChildrenChanged
-                    && WatchedEvent.getPath().equals(PATH)) {
+            if (aa.getType() == Watcher.Event.EventType.NodeChildrenChanged
+                    && aa.getPath().equals(PATH)) {
                 showChildNode(PATH);
             }else{
                 showChildNode(PATH);
@@ -78,7 +78,7 @@ public class WatchChild {
 //        }, new Stat());
 
 
-        byte[] data = zk.getData(PATH, watchedEvent -> {
+        byte[] data = zk.getData(PATH, aa -> {
             try {
                 trigerValue(PATH);
             } catch (KeeperException | InterruptedException e) {
@@ -95,7 +95,7 @@ public class WatchChild {
     }
 
     /**
-     * @param path
+     * @param
      */
     private boolean trigerValue(String nodePath) throws KeeperException, InterruptedException {
 
